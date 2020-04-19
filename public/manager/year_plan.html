@@ -1,0 +1,101 @@
+<!--这是生产材料购买模块-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>年计划表</title>
+    <link rel="stylesheet" type="text/css" href="css/year_plan.css">
+</head>
+<body>
+<div id="content">
+    <div id="head" class="cardLayout">
+        <h1>年计划表</h1>
+    </div>
+    <div id="body" class="cardLayout">
+        <div class="cardLayout" style="margin: 10px 0px">
+            <p style="text-align: center">年计划</p>
+            <table width="100%" id="record">
+                <tr class="cardLayout">
+                    <td>年计划编号</td>
+                    <td>农场名</td>
+                    <td>年份</td>
+                    <td>品种名称</td>
+                    <td>土地量</td>
+                    <td>播种日期</td>
+                    <td>实际采收结束日期</td>
+                </tr>
+                <!--js在此处添加条目-->
+            </table>
+        </div>
+        <div class="cardLayout" style="margin: 10px 0px">
+            <p style="text-align: center">添加年计划</p>
+
+            <table width="100%">
+                <tr class="cardLayout" style="width: 10/8/100;">
+                    <td>农场名</td>
+                    <td>年份</td>
+                    <td>品种名称</td>
+                    <td>土地量</td>
+                    <td>播种日期</td>
+                    <td>实际采收结束日期</td>
+                </tr>
+            </table>
+            <!--填写一个购买表-->
+            <form action="/year_plan" id="form" name="form" method="post" class="cardLayout_input">
+                <input id="farm_name" type="text" name="farm_name" placeholder="农场名"/>
+                <input id="year_pro" type="text" name="year_pro" placeholder="年份"/>
+                <input id="crop" type="text" name="crop" placeholder="品种名称"/>
+                <input id="land_count" type="text" name="land_count" placeholder="土地量"/>
+                <input id="seed_date" type="text" name="seed_date" placeholder="播种日期"/>
+                <input id="end_date" type="text" name="end_date" placeholder="实际采收结束日期"/>
+                <div>
+                    <input type="reset" value="重置"/>
+                    <input id="submit" type="reset" value="提交"/>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="tile" class="cardLayout">
+        <p> All Right Reserved</p>
+    </div>
+</div>
+<script src="../js/jquery.js"></script>
+<script src="../js/jquery.form.js"></script>
+<script>
+    $(function () {
+        //获取数据
+        $.get('/year_plan', function (data) {
+            for (let list of data) {
+                let table = '<tr class="cardLayout"><td>';
+                let s = '</td><td>';
+                for (let ele of list) {
+                    table += (ele + s);
+                }
+                table += '</td></tr>';
+                $("#record").append(table);
+            }
+        });
+        //提交数据
+        $("#submit").on("click", function () {
+            let farm_name = $("#farm_name").val();
+            let year_pro = $("#year_pro").val();
+            let crop = $("#crop").val();
+            let land_count = $("#land_count").val();
+            let seed_date = $("#seed_date").val();
+            let end_date = $("#end_date").val();
+            
+
+            if ( farm_name && year_pro && crop && land_count && seed_date && end_date ) {
+                $("#form").ajaxSubmit(
+                    function () {
+                        alert("提交成功！");
+                        location.reload();
+                    })
+            } else {
+                alert("所有表格必填！");
+            }
+        })
+    });
+</script>
+</body>
+</html>

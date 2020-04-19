@@ -1,0 +1,112 @@
+<!--这是新曾品种默认计划表模块-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>品种默认计划表</title>
+    <link rel="stylesheet" type="text/css" href="css/crop_plan.css">
+    
+</head>
+<body>
+<div id="content">
+    <div id="head" class="cardLayout">
+        <h1>品种默认计划表</h1>
+    </div>
+    <div id="body" class="cardLayout">
+        <div class="cardLayout" style="margin: 10px 0px">
+            <p style="text-align: center">计划表</p>
+            <table width="100%" id="record">
+                <tr class="cardLayout">
+                    <td>品种名称</td>
+                    <td>地区名称</td>
+                    <td>播种节气名称</td>
+                    <td>采集模式</td>
+                    <td>采集起始日期</td>
+                    <td>采集结束日期</td>
+                    <td>亩产量</td>
+                    <td>采收高峰起始日期</td>
+                    <td>采收高峰结束日期</td>
+                    <td>高峰亩产</td>
+                </tr>
+                <!--js在此处添加条目-->
+            </table>
+        </div>
+        <div class="cardLayout" style="margin: 10px 0px">
+            <p style="text-align: center">输入</p>
+
+            <!-- <table width="100%">
+                <tr class="cardLayout">
+                    <td>名称</td>
+                    <td>数量</td>
+                    <td>单价</td>
+                    <td>备注</td>
+                </tr>
+            </table> -->
+            <!--填写一个购买表-->
+            <form action="/crop_plan" id="form" name="form" method="post" class="cardLayout_input">
+                <input id="crop" type="text" name="crop" placeholder="品种名称"/>
+                <input id="area" type="text" name="area" placeholder="地区名称"/>
+                <input id="solarterm" type="text" name="solarterm" placeholder="播种节气名称"/>
+                <input id="mode" type="text" name="mode" placeholder="采收模式"/>
+                <input id="output_be" type="text" name="output_be" placeholder="采收起始日期"/>
+                <input id="output_end" type="text" name="output_end" placeholder="采收结束日期"/>
+                <input id="mu_output" type="text" name="mu_output" placeholder="亩产量"/>
+                <input id="output_max_be" type="text" name="output_max_be" placeholder="采收高峰起始日期"/>
+                <input id="output_max_end" type="text" name="output_max_end" placeholder="采收高峰结束日期"/>
+                <input id="mu_output_max" type="text" name="mu_output_max" placeholder="高峰亩产量"/>
+                <div>
+                    <input type="reset" value="重置"/>
+                    <input id="submit" type="reset" value="提交"/>
+                </div>
+                
+            </form>
+                 
+        </div>
+    </div>
+    <div id="tile" class="cardLayout">
+        <p> All Right Reserved</p>
+    </div>
+</div>
+<script src="../js/jquery.js"></script>
+<script src="../js/jquery.form.js"></script>
+<script>
+    $(function () {
+        //获取数据
+        $.get('/crop_plan', function (data) {
+            for (let list of data) {
+                let table = '<tr class="cardLayout"><td>';
+                let s = '</td><td>';
+                for (let ele of list) {
+                    table += (ele + s);
+                }
+                table += '</td></tr>';
+                $("#record").append(table);
+            }
+        });
+        //提交数据
+        $("#submit").on("click", function () {
+            let crop = $("#crop").val();
+            let area = $("#area").val();
+            let solarterm = $("#solarterm").val();
+            let mode = $("#mode").val();
+            let output_be = $("#output_be").val();
+            let output_end = $("#output_end").val();
+            let mu_output = $("#mu_output").val();
+            let output_max_be = $("#output_max_be").val();
+            let output_max_end = $("#output_max_end").val();
+            let mu_output_max = $("#mu_output_max").val();
+
+            if (crop && area && solarterm && mode && output_be && output_end && mu_output && output_max_be&& mu_output) {
+                $("#form").ajaxSubmit(
+                    function () {
+                        alert("提交成功！");
+                        location.reload();
+                    })
+            } else {
+                alert("所有表格必填！");
+            }
+        })
+    });
+</script>
+</body>
+</html>

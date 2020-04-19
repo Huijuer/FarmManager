@@ -1,0 +1,50 @@
+<!--这是新增节气表模块-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>节气表</title>
+    <link rel="stylesheet" type="text/css" href="css/solar_term.css">
+</head>
+<body>
+<div id="content">
+    <div id="head" class="cardLayout">
+        <h1>节气表</h1>
+    </div>
+    <div id="body" class="cardLayout">
+        <div class="cardLayout" style="margin: 10px 0px">
+            <p style="text-align: center">节气表</p>
+            <table width="100%" id="record">
+                <tr class="cardLayout">
+                    <td>节气</td>
+                    <td>年份</td>
+                    <td>日期</td>
+                </tr>
+                <!--js将在此处添加条目-->
+            </table>
+        </div>
+    </div>
+    <div id="tile" class="cardLayout">
+        <p> All Right Reserved</p>
+    </div>
+</div>
+<script src="../js/jquery.js"></script>
+<script src="../js/jquery.form.js"></script>
+<script>
+    $(function () {
+        //获取数据
+        $.get('/solar_term', function (data) {
+            for (let list of data) {
+                let table = '<tr class="cardLayout"><td>';
+                let s = '</td><td>';
+                for (let ele of list) {
+                    table += (ele + s);
+                }
+                table += '</td></tr>';
+                $("#record").append(table);
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+
+.cardLayout{
+    border: 2px solid #cccccc;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+}
+
+.cardLayout_input{
+    outline-style: none ;
+    border: 1px solid #ccc; 
+    border-radius: 19px;
+    padding: 13px 14px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft";
+    
+    
+}
+
+tr{
+    height: 50px;
+}
+
+input{
+    
+    box-sizing: border-box;
+    border: 1px solid #555;
+    outline: none;
+    width: 20%;
+    height: 40px;
+    margin: 2%;
+
+    padding: 7px 0;
+    background: #F4F4F7;
+    border-radius: 3px;
+    padding-left:5px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+}
+
+input:focus{
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}
+
+html{
+    background: url(../img/bk01.jpg) no-repeat;
+    background-size: cover;
+}
